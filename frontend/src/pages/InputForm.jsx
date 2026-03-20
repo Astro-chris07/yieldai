@@ -37,7 +37,8 @@ export default function InputForm({ onSuccess, onBack }) {
         Pesticide_usage: parseFloat(formData.Pesticide_usage),
       };
       
-      const response = await axios.post('http://localhost:8000/api/predict', payload);
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+      const response = await axios.post(`${apiUrl}/api/predict`, payload);
       onSuccess(response.data);
     } catch (err) {
       setError(err.response?.data?.detail || 'Failed to connect to AI Engine.');
